@@ -144,6 +144,11 @@ public class pelanggan extends javax.swing.JFrame {
         });
 
         jButton3.setText("Hapus");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Batal");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -345,6 +350,24 @@ public class pelanggan extends javax.swing.JFrame {
         txtAlamat.setText(alamat);
         txtTelp.setText(telp);        // TODO add your handling code here:
     }//GEN-LAST:event_tblplgnMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int ok = JOptionPane.showConfirmDialog(null, "Hapus","Konfirmasi Dialog", JOptionPane.YES_NO_OPTION);
+        if(ok ==0){
+            String sql = "DELETE FROM pelanggan WHERE id ='"+txtId.getText()+"'";
+            try{
+                PreparedStatement stat = conn.prepareStatement(sql);
+                stat.executeUpdate();
+                JOptionPane.showMessageDialog(null, "data berhasil dihapus");
+                kosong();
+                txtId.requestFocus();
+            }catch(SQLException ex){
+                 JOptionPane.showMessageDialog(null, "data gagal dihapus "+ex);
+            }
+            datatable();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
