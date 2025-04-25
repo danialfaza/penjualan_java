@@ -23,9 +23,10 @@ public class pelanggan extends javax.swing.JFrame {
      */
     public pelanggan() {
         initComponents();
-        datatable();
         aktif();
         kosong();
+        datatable();
+        
     }
 
     /**
@@ -158,10 +159,20 @@ public class pelanggan extends javax.swing.JFrame {
         });
 
         jButton5.setText("Keluar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Data Pelanggan");
 
         jButton6.setText("Cari");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         tblplgn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,6 +185,9 @@ public class pelanggan extends javax.swing.JFrame {
         tblplgn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblplgnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblplgnMouseEntered(evt);
             }
         });
         jScrollPane2.setViewportView(tblplgn);
@@ -305,7 +319,8 @@ public class pelanggan extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        kosong();
+        datatable();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void rlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rlakiActionPerformed
@@ -368,6 +383,18 @@ public class pelanggan extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tblplgnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblplgnMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblplgnMouseEntered
 
     /**
      * @param args the command line arguments
