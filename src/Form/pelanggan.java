@@ -66,10 +66,8 @@ public class pelanggan extends javax.swing.JFrame {
                 }
                 tblplgn.setModel(tabmode);
             }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"data gagal diload"+ex);
-            }
-            
-            
+                JOptionPane.showMessageDialog(null,"data gagal diload "+ex);
+            }    
     }
     
     
@@ -82,8 +80,8 @@ public class pelanggan extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         txtNP = new javax.swing.JTextField();
         txtTelp = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rlaki = new javax.swing.JRadioButton();
+        rperempuan = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -106,14 +104,14 @@ public class pelanggan extends javax.swing.JFrame {
 
         jLabel1.setText("Data Pelanggan");
 
-        jRadioButton1.setText("Laki-Laki");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        rlaki.setText("Laki-Laki");
+        rlaki.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rlakiActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("Perempuan");
+        rperempuan.setText("Perempuan");
 
         jLabel2.setText("ID Pelanggan");
 
@@ -190,9 +188,9 @@ public class pelanggan extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(rlaki)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2))
+                                .addComponent(rperempuan))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtId)
                                 .addComponent(txtNP)
@@ -238,8 +236,8 @@ public class pelanggan extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
+                    .addComponent(rlaki)
+                    .addComponent(rperempuan)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,16 +265,38 @@ public class pelanggan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String jenis = null;
+        if(rlaki.isSelected()){
+            jenis = "Laki-Laki";
+        }else if(rperempuan.isSelected()){
+            jenis = "Perempuan";
+        }
+        String sql ="INSERT INTO pelanggan values (?,?,?,?,?)";
+        try{
+            PreparedStatement stat = conn.prepareStatement(sql);
+            stat.setString(1, txtId.getText());
+            stat.setString(2, txtNP.getText());
+            stat.setString(3, jenis);
+            stat.setString(4, txtTelp.getText());
+            stat.setString(5, txtAlamat.getText());
+            
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "data berhasil disimpan");
+            kosong();
+            txtId.requestFocus();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"data gagal disimpan "+ex);
+        }
+        datatable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rlakiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rlakiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,10 +348,10 @@ public class pelanggan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton rlaki;
+    private javax.swing.JRadioButton rperempuan;
     private javax.swing.JTable tblplgn;
     private javax.swing.JTextArea txtAlamat;
     private javax.swing.JTextField txtCari;
