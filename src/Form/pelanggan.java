@@ -24,6 +24,8 @@ public class pelanggan extends javax.swing.JFrame {
     public pelanggan() {
         initComponents();
         datatable();
+        aktif();
+        kosong();
     }
 
     /**
@@ -69,8 +71,8 @@ public class pelanggan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"data gagal diload "+ex);
             }    
     }
-    
-    
+        
+            
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -135,6 +137,11 @@ public class pelanggan extends javax.swing.JFrame {
         });
 
         jButton2.setText("Ubah");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Hapus");
 
@@ -153,15 +160,17 @@ public class pelanggan extends javax.swing.JFrame {
 
         tblplgn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        tblplgn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblplgnMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblplgn);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -297,6 +306,45 @@ public class pelanggan extends javax.swing.JFrame {
     private void rlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rlakiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rlakiActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         String jenis = null;
+         if(rlaki.isSelected()){
+            jenis = "Laki-Laki";
+        }else if(rperempuan.isSelected()){
+            jenis = "Perempuan";
+        }
+        try{
+            String sql = "UPDATE pelanggan SET nmplgn=?, jenis=?,telepon=? ,alamat=? WHERE id='"+txtId.getText()+"'";
+            PreparedStatement stat = conn.prepareStatement(sql);
+            stat.setString(1, txtNP.getText());
+            stat.setString(2, jenis);
+            stat.setString(3, txtTelp.getText());
+            stat.setString(4, txtAlamat.getText());
+            
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "data berhasil diubah");
+            kosong();
+            txtId.requestFocus();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"data gagal diubah "+ex);
+        }
+        datatable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tblplgnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblplgnMouseClicked
+        int bar = tblplgn.getSelectedRow();
+        String id = tabmode.getValueAt(bar, 0).toString();
+        String nama = tabmode.getValueAt(bar, 1).toString();
+        String jenis = tabmode.getValueAt(bar, 2).toString();
+        String alamat = tabmode.getValueAt(bar, 3).toString();
+        String telp = tabmode.getValueAt(bar, 4).toString();
+        
+        txtId.setText(id);
+        txtNP.setText(nama);
+        txtAlamat.setText(alamat);
+        txtTelp.setText(telp);        // TODO add your handling code here:
+    }//GEN-LAST:event_tblplgnMouseClicked
 
     /**
      * @param args the command line arguments
